@@ -1,6 +1,6 @@
 
-# # except subfolder named dags
-# !dags/*
+# except subfolder named dags
+!dags/*
 
-# # all files ignore in this folder and subfolder 
-# *
+# all files ignore in this folder and subfolder 
+*
