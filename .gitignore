@@ -1,4 +1,4 @@
-# all file ignore
+# all files ignore in this folder and subfolder 
 *
 # except Dags folder
 !/Dags/
