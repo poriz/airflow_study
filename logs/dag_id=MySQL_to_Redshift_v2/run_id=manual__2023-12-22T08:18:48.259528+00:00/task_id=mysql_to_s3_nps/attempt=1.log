@@ -1,0 +1,35 @@
+[2023-12-22T08:19:16.322+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: MySQL_to_Redshift_v2.mysql_to_s3_nps manual__2023-12-22T08:18:48.259528+00:00 [queued]>
+[2023-12-22T08:19:16.374+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: MySQL_to_Redshift_v2.mysql_to_s3_nps manual__2023-12-22T08:18:48.259528+00:00 [queued]>
+[2023-12-22T08:19:16.374+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-12-22T08:19:16.374+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 2
+[2023-12-22T08:19:16.374+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-12-22T08:19:16.441+0000] {taskinstance.py:1300} INFO - Executing <Task(SqlToS3Operator): mysql_to_s3_nps> on 2023-12-22 08:18:48.259528+00:00
+[2023-12-22T08:19:16.456+0000] {standard_task_runner.py:55} INFO - Started process 172 to run task
+[2023-12-22T08:19:16.459+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'MySQL_to_Redshift_v2', 'mysql_to_s3_nps', 'manual__2023-12-22T08:18:48.259528+00:00', '--job-id', '121', '--raw', '--subdir', 'DAGS_FOLDER/MySQL_to_Redshift_v2.py', '--cfg-path', '/tmp/tmppdqjppq9']
+[2023-12-22T08:19:16.471+0000] {standard_task_runner.py:83} INFO - Job 121: Subtask mysql_to_s3_nps
+[2023-12-22T08:19:16.655+0000] {task_command.py:388} INFO - Running <TaskInstance: MySQL_to_Redshift_v2.mysql_to_s3_nps manual__2023-12-22T08:18:48.259528+00:00 [running]> on host 17bd7117c067
+[2023-12-22T08:19:16.738+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/***/utils/context.py:205: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2023-12-22T08:19:16.842+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=MySQL_to_Redshift_v2
+AIRFLOW_CTX_TASK_ID=mysql_to_s3_nps
+AIRFLOW_CTX_EXECUTION_DATE=2023-12-22T08:18:48.259528+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-12-22T08:18:48.259528+00:00
+[2023-12-22T08:19:16.860+0000] {base.py:73} INFO - Using connection ID 'mysql_conn_id' for task execution.
+[2023-12-22T08:19:18.091+0000] {base.py:73} INFO - Using connection ID 'mysql_conn_id' for task execution.
+[2023-12-22T08:19:18.411+0000] {sql_to_s3.py:165} INFO - Data from SQL obtained
+[2023-12-22T08:19:18.412+0000] {sql_to_s3.py:172} INFO - Writing data to temp file
+[2023-12-22T08:19:18.414+0000] {sql_to_s3.py:175} INFO - Uploading data to S3
+[2023-12-22T08:19:18.443+0000] {base.py:73} INFO - Using connection ID 'aws_conn_id' for task execution.
+[2023-12-22T08:19:18.444+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='aws_conn_id', conn_type='aws') credentials retrieved from login and password.
+[2023-12-22T08:19:19.733+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/urllib3/connectionpool.py:1052: InsecureRequestWarning: Unverified HTTPS request is being made to host 'grepp-data-engineering.s3.ap-northeast-2.amazonaws.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,
+
+[2023-12-22T08:19:19.801+0000] {taskinstance.py:1323} INFO - Marking task as SUCCESS. dag_id=MySQL_to_Redshift_v2, task_id=mysql_to_s3_nps, execution_date=20231222T081848, start_date=20231222T081916, end_date=20231222T081919
+[2023-12-22T08:19:19.894+0000] {local_task_job.py:208} INFO - Task exited with return code 0
+[2023-12-22T08:19:19.957+0000] {taskinstance.py:2578} INFO - 1 downstream tasks scheduled from follow-on schedule check

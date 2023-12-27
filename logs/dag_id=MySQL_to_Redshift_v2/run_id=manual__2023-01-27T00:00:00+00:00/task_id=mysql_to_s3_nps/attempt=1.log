@@ -1,0 +1,38 @@
+[2023-12-16T15:04:51.206+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: MySQL_to_Redshift_v2.mysql_to_s3_nps manual__2023-01-27T00:00:00+00:00 [queued]>
+[2023-12-16T15:04:51.216+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: MySQL_to_Redshift_v2.mysql_to_s3_nps manual__2023-01-27T00:00:00+00:00 [queued]>
+[2023-12-16T15:04:51.217+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-12-16T15:04:51.217+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 2
+[2023-12-16T15:04:51.217+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-12-16T15:04:51.235+0000] {taskinstance.py:1300} INFO - Executing <Task(SqlToS3Operator): mysql_to_s3_nps> on 2023-01-27 00:00:00+00:00
+[2023-12-16T15:04:51.240+0000] {standard_task_runner.py:55} INFO - Started process 184 to run task
+[2023-12-16T15:04:51.245+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'MySQL_to_Redshift_v2', 'mysql_to_s3_nps', 'manual__2023-01-27T00:00:00+00:00', '--job-id', '68', '--raw', '--subdir', 'DAGS_FOLDER/MySQL_to_Redshift_v2.py', '--cfg-path', '/tmp/tmpd6l52hxi']
+[2023-12-16T15:04:51.246+0000] {standard_task_runner.py:83} INFO - Job 68: Subtask mysql_to_s3_nps
+[2023-12-16T15:04:51.310+0000] {task_command.py:388} INFO - Running <TaskInstance: MySQL_to_Redshift_v2.mysql_to_s3_nps manual__2023-01-27T00:00:00+00:00 [running]> on host b4327137477b
+[2023-12-16T15:04:51.922+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/***/utils/context.py:205: AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+  warnings.warn(_create_deprecation_warning(key, self._deprecation_replacements[key]))
+
+[2023-12-16T15:04:52.278+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=MySQL_to_Redshift_v2
+AIRFLOW_CTX_TASK_ID=mysql_to_s3_nps
+AIRFLOW_CTX_EXECUTION_DATE=2023-01-27T00:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-01-27T00:00:00+00:00
+[2023-12-16T15:04:52.288+0000] {base.py:73} INFO - Using connection ID 'mysql_conn_id' for task execution.
+[2023-12-16T15:04:52.533+0000] {base.py:73} INFO - Using connection ID 'mysql_conn_id' for task execution.
+[2023-12-16T15:04:52.925+0000] {sql_to_s3.py:165} INFO - Data from SQL obtained
+[2023-12-16T15:04:52.926+0000] {sql_to_s3.py:172} INFO - Writing data to temp file
+[2023-12-16T15:04:52.947+0000] {sql_to_s3.py:175} INFO - Uploading data to S3
+[2023-12-16T15:04:52.954+0000] {base.py:73} INFO - Using connection ID 'aws_conn_id' for task execution.
+[2023-12-16T15:04:52.955+0000] {connection_wrapper.py:334} INFO - AWS Connection (conn_id='aws_conn_id', conn_type='aws') credentials retrieved from login and password.
+[2023-12-16T15:04:54.449+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/urllib3/connectionpool.py:1052: InsecureRequestWarning: Unverified HTTPS request is being made to host 'grepp-data-engineering.s3.ap-northeast-2.amazonaws.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,
+
+[2023-12-16T15:04:55.351+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/urllib3/connectionpool.py:1052: InsecureRequestWarning: Unverified HTTPS request is being made to host 'grepp-data-engineering.s3.ap-northeast-2.amazonaws.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,
+
+[2023-12-16T15:04:55.498+0000] {taskinstance.py:1323} INFO - Marking task as SUCCESS. dag_id=MySQL_to_Redshift_v2, task_id=mysql_to_s3_nps, execution_date=20230127T000000, start_date=20231216T150451, end_date=20231216T150455
+[2023-12-16T15:04:55.622+0000] {local_task_job.py:208} INFO - Task exited with return code 0
+[2023-12-16T15:04:55.741+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check

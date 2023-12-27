@@ -1,0 +1,3 @@
+!airflow-setup/
+airflow-setup/*
+!airflow-setup/dags/*
