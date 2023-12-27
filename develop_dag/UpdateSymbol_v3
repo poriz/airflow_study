@@ -1,0 +1,100 @@
+# 내 코드 (과제)
+from airflow import DAG
+from airflow.decorators import task
+from airflow.providers.postgres.hooks.postgres import PostgresHook
+from datetime import datetime
+from pandas import Timestamp
+
+import yfinance as yf
+import pandas as pd
+import logging
+
+
+def get_Redshift_connection(autocommit=True):
+    hook = PostgresHook(postgres_conn_id='redshift_dev_db')
+    conn = hook.get_conn()
+    conn.autocommit = autocommit
+    return conn.cursor()
+
+
+@task
+def etl(schema, table, records,symbol):
+    logging.info("ETL started")
+    # 데이터 수집 extract
+    ticket = yf.Ticker(symbol)
+    data = ticket.history()
+    records = []
+
+    for index, row in data.iterrows():
+        date = index.strftime('%Y-%m-%d %H:%M:%S')
+        records.append([date, row["Open"], row["High"], row["Low"], row["Close"], row["Volume"]])   
+
+    cur = get_Redshift_connection()
+
+
+    # 원본 테이블이 없는 경우 생성
+    create_table_sql = f"""
+        CREATE TABLE IF NOT EXISTS {schema}.{table} (
+            date date,
+            "open" float,
+            high float,
+            low float,
+            close float,
+            volume bigint,
+            created_date timestamp default GETDATE()
+        );"""
+
+    # 임시 테이블생성
+    create_t_sql = f"""CREATE TEMP TABLE t AS SELECT * FROM {schema}.{table};"""
+    loggin.info(create_t_sql)
+    try:
+        cur.execute(create_table_sql)  
+        cur.execute(create_t_sql)
+        cur.execute("COMMIT;")
+    except Exception as e:
+        cur.execute("ROLLBACK;")
+        raise
+
+    # 임시 테이블에 데이터 입력하기, 임시 테이블의 값들과 동일하게 들어가기 때문에 바로 이어 붙인다.
+    insert_sql = f"INSERT INTO t VALUES" +",".join(records);"
+    logging.info(insert_sql)
+    try:
+        cur.execute(insert_sql)
+        cur.execute("COMMIT;")
+    execpt Exception as e:
+        cur.execute("ROLLBACK;")
+        raise
+
+
+    # 원본 테이블 대체
+    alter_sql = f"""DELETE FROM {schema}.{table};
+        INSERT INTO {schema}.{table}
+        SELECT date,open,high,low,close,volume,created_date FROM(
+            SELECT *, ROW_NUMBER() OVER (PARTITION BY date ORDER BY created_date DESC) seq
+            FROM t
+        )
+        WHERE seq = 1;
+    """
+    logging.info(alter_sql)
+    try:
+        cur.execute(alter_sql)
+        cur.execute("COMMIT;")
+
+    except Exception as error:
+        print(error)
+        cur.execute("ROLLBACK;") 
+        raise
+
+    logging.info("ETL done")
+
+
+with DAG(
+    dag_id = 'UpdateSymbol_v3',
+    start_date = datetime(2023,5,30),
+    catchup=False,
+    tags=['API'],
+    schedule = '0 10 * * *'
+) as dag:
+
+    results = get_historical_prices("AAPL")
+    load("<schema_name>", "stock_info_v3", results)
