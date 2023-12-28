@@ -1,5 +1,8 @@
 FROM apache/airflow:latest
 USER root
+COPY create-env.sh /create-env.sh
+RUN chmod +x /create-env.sh
+
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
          vim \
