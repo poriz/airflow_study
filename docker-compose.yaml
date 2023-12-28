@@ -47,6 +47,8 @@ x-airflow-common:
   # Comment the image line, place your Dockerfile in the directory where you placed the docker-compose.yaml
   # and uncomment the "build" line below, Then run `docker-compose build` to build the images.
   image: ${AIRFLOW_IMAGE_NAME:-poriz/airflow_custom:latest}
+  # set local user AIRFLOW_UID
+  command: ["sh", "-c", "echo -e 'AIRFLOW_UID=$(id -u)\nAIRFLOW_GID=0' > .env"]
   # build: .
   environment:
     &airflow-common-env
