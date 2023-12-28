@@ -22,7 +22,7 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
     - name: Build the Docker image
-      run: docker build --tag ${{secrets.DOCKER_USER}}/airflow_custom:latest
+      run: docker build --tag ${{secrets.DOCKER_USER}}/airflow_custom:latest .
 
     - name: docker push
       run: docker push ${{secrets.DOCKER_USER}}/airflow_custom:latest
